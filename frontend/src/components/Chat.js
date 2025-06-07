@@ -7,7 +7,9 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import ChatBlock from './ChatBlock';
 
 const Chat = () => {
+  const BASE_SERVER_URL = process.env.REACT_APP_API_BASE_URL
   const token = localStorage.getItem('token');
+
 
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -18,7 +20,7 @@ const Chat = () => {
 
   const fetchUsername = async (userId) => {
   try {
-    const res = await fetch(`http://localhost:4000/api/auth/${userId}`);
+    const res = await fetch(`${BASE_SERVER_URL}/api/auth/${userId}`);
     const data = await res.json();
     return data.username;
   } catch (err) {
@@ -38,7 +40,7 @@ const Chat = () => {
     scrollToBottom();
 
     // Fetch user info
-    fetch('http://localhost:4000/api/auth/me', {
+    fetch(`${BASE_SERVER_URL}/api/auth/me`, {
       headers: { 'x-auth-token': token }
     }).then(res => res.json()).then(userData => {
       setUser(userData);

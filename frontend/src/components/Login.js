@@ -8,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const BASE_SERVER_URL = process.env.REACT_APP_API_BASE_URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const Login = () => {
     // console.log({ email, password });
     // alert('Logged in!');
     try {
-      const res = await axios.post('http://localhost:4000/api/auth/signin', { email, password });
+      const res = await axios.post(`${BASE_SERVER_URL}/api/auth/signin`, { email, password });
       localStorage.setItem('token', res.data.token);
       navigate('/');
     } catch (error) {

@@ -10,6 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+  const BASE_SERVER_URL = process.env.REACT_APP_API_BASE_URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const Signup = () => {
       return;
     }
     try {
-      await axios.post('http://localhost:4000/api/auth/signup', { username, email, password });
+      await axios.post(`${BASE_SERVER_URL}/api/auth/signup`, { username, email, password });
       alert('Registration successful!');
       navigate('/signin');
     } catch (error) {

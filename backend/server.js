@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const path = require('path');
+const BASE_CLIENT_URL = process.env.CLIENT_URL
 
 const app = express();
 app.use(express.static(path.join(__dirname, '../frontend/build')));
@@ -33,7 +34,7 @@ app.use('/api/auth', authRoutes);
 const { setupSocket } = require('./socket');
 const io = require('socket.io')(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: BASE_CLIENT_URL,
     credentials: true
   }
 });

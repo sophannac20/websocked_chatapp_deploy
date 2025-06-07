@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Profile = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const BASE_SERVER_URL = process.env.REACT_APP_API_BASE_URL
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const Profile = () => {
 
     const fetchProfile = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/auth/me', {
+        const res = await axios.get(`${BASE_SERVER_URL}/api/auth/me`, {
           headers: { 'x-auth-token': token }
         });
         setUser(res.data);
